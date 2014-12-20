@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Raspberry Pi Camera Gallery
+  each val in images
+    img(src='http://s3-us-west-2.amazonaws.com/' + bucket + '/' + val)
+    br
