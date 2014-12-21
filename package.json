@@ -1,6 +1,6 @@
 {
   "name": "raspberry-pi-photo-gallery",
-  "description" : "Display images uploaded from pi to S3 in a photo gallery",
+  "description": "Display images uploaded from pi to S3 in a photo gallery",
   "version": "0.1.0",
   "private": false,
   "scripts": {
@@ -14,6 +14,7 @@
     "express": "~4.9.0",
     "jade": "~1.6.0",
     "lodash": "^2.4.1",
+    "moment": "^2.8.4",
     "morgan": "~1.3.0"
   }
 }
