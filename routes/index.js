@@ -17,7 +17,7 @@ function getImages(callback) {
       imageNames.push(image.Key);
     });
 
-    console.log(imageNames);
+    imageNames.reverse();
     callback(imageNames);
   });
 }
