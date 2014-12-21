@@ -1,7 +1,9 @@
 var express = require('express');
 var path = require('path');
 
-var routes = require('./routes/index');
+var gallery = require('./routes/index');
+var stream = require('./routes/stream');
+var apiStream = require('./api/stream');
 
 var app = express();
 
@@ -10,7 +12,9 @@ app.set('view engine', 'jade');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use('/', gallery);
+app.use('/stream', stream);
+app.use('/api/stream', apiStream);
 
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);

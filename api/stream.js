@@ -11,7 +11,7 @@ AWS.config.update({
 });
 var s3 = new AWS.S3();
 
-function getImages(callback) {
+function getLatestImage(callback) {
   var params = {
     Bucket : credentials.bucket,
     Prefix : moment().utc().format('MM-DD-YYYY_h') // my pi stores files in utc format
@@ -23,22 +23,19 @@ function getImages(callback) {
       imageNames.push(image.Key);
     });
 
-    imageNames.reverse();
-    callback(imageNames);
+    var newest = imageNames.pop();
+    callback(newest);
   });
 }
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  getImages(function(images) {
-    res.render(
-      'index',
-      {
-        title: 'Raspberry Pi Image Gallery',
-        images: images,
-        bucket: credentials.bucket
-      }
-    );
+  getLatestImage(function(image) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({
+      image : image,
+      bucket : credentials.bucket
+    }));
   });
 });
 
