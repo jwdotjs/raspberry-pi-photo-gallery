@@ -15,7 +15,7 @@ var s3 = new AWS.S3();
 function getLatestImage(callback) {
   var params = {
     Bucket : credentials.bucket,
-    Prefix : moment().utc().format('A_MM-DD-YYYY_h') // my pi stores files in utc format
+    Prefix : moment().utc().format('YYYY-MM-DDTHH') // my pi stores files in utc format ISO-8601
   };
 
   s3.listObjects(params, function(err, data) {
