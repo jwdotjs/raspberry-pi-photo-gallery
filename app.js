@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 
@@ -5,6 +7,19 @@ var gallery = require('./routes/index');
 var stream = require('./routes/stream');
 var apiStream = require('./api/stream');
 
+// If --crons passed to command line, run the crons in /crons/index
+var yargs = require('yargs')
+  .usage('Usage: $0 --crons')
+  .default('crons', false)
+  .boolean('crons');
+
+var argv = yargs.argv;
+if (argv.crons) {
+  require('./crons/index')();
+  console.log('Crons activated');
+}
+
+// Server configuration
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -24,7 +39,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-var port = process.env.PORT || 3000; //specify a port if you wish
+var port = process.env.PORT || 3000; // Specify a port if you wish
 var server = app.listen(port, function() {
   var host = server.address().address;
   var port = server.address().port;
