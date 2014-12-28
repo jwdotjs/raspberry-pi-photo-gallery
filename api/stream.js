@@ -8,6 +8,7 @@ var bucket = require('../utils/bucket');
 
 function getLatestImage(callback) {
   bucket.getImagesWithinHour(function(imageNames) {
+    imageNames.reverse();
     var newest = imageNames.pop();
     callback(newest);
   });

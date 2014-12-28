@@ -36,7 +36,6 @@ module.exports = {
         imageNames.push(image.Key);
       });
 
-      imageNames.reverse();
       callback(imageNames);
     });
   },
